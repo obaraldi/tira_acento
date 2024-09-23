@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto Sem Acento</title>
+    <style>
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body style="background-color:#d1ffa5; padding:0;  margin: 0;"> 
+
+    <div style="text-align:left;">
+        
+        <h1 style="vertical-align: bottom; position:relative; display: inline-block; width:461px; height:55px; background:none; font-size:32pt; font-family:'Gill Sans', 'Gill Sans MT', Calibri, sans-serif; color:#505050; text-align:left; " id="heading_49ec4bae">Retirar Acentos do Texto</h1>  
+        </div>
+      
+   
+        <div class="container">
+        <textarea id="textArea1" rows="24" placeholder="Digite seu texto aqui..." oninput="removeAccents()"></textarea>
+        <textarea id="textArea2" rows="24" placeholder="Texto sem acento aparecerá aqui..." readonly></textarea>
+    </div>
+
+    <script>
+        function removeAccents() {
+            const textArea1 = document.getElementById('textArea1');
+            const textArea2 = document.getElementById('textArea2');
+            textArea2.value = textWithoutAccents(textArea1.value);
+        }
+
+        function textWithoutAccents(text) {
+            const accents = 'áàâãäåçéèêëíìîïðñóòôõöøùúûüýÿ';
+            const noAccents = 'aaaaaaceeeeiiiidnooooouuuuyy';
+            let accentedChars = Array.from(accents);
+            let noAccentChars = Array.from(noAccents);
+
+            return text.split('').map(char => {
+                let index = accentedChars.indexOf(char.toLowerCase());
+                if (index !== -1) {
+                    return noAccentChars[index];
+                }
+                return char;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
